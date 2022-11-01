@@ -7,13 +7,19 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 @RestController
-@RequestMapping("/client")
 public class ClientController {
 
-//    @GetMapping("/allusers/)
-//    public String getAllClients(Model model){
-//        model.addAttribute("client",Client);
-//
-//    }
+    private final ClientRepository repository;
+
+    ClientController(ClientRepository repository) {
+        this.repository = repository;
+    }
+
+    @GetMapping("/client")
+    List<Client> all(){
+        return repository.findAll();
+    }
 }
