@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/client")
 public class ClientController {
 
-//    @GetMapping
+//    @GetMapping("/allusers/)
 //    public String getAllClients(Model model){
 //        model.addAttribute("client",Client);
 //

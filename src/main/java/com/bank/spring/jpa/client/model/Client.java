@@ -22,7 +22,7 @@ public class Client {
     @Column(name = "password")
     private String password;
 
-    public Client() {
+    protected Client() {
     }
 
     public Client(String firstName, String lastName, String password) {
@@ -30,6 +30,7 @@ public class Client {
         this.lastName = lastName;
         this.password = password;
     }
+
 
     public long getId() {
         return id;
