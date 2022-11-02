@@ -3,9 +3,7 @@ package com.bank.spring.jpa.client;
 import com.bank.spring.jpa.client.model.Client;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -22,4 +20,20 @@ public class ClientController {
     List<Client> all(){
         return repository.findAll();
     }
+
+    //get single client
+
+    @GetMapping("/client/{id}")
+    Client single(@PathVariable Long id) {
+        return repository.findById(id).orElseThrow(() -> new ClientNotFoundException(id));
+    }
+
+    //post new client
+
+    @PostMapping("/client")
+    Client newClient(@RequestBody Client newClient) {
+        return repository.save(newClient);
+    }
+
+
 }
