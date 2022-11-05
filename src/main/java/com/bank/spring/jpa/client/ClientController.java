@@ -2,6 +2,7 @@ package com.bank.spring.jpa.client;
 
 import com.bank.spring.jpa.client.model.Client;
 import org.apache.catalina.User;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -11,29 +12,24 @@ import java.util.List;
 @RequestMapping("/client")
 public class ClientController {
 
-    private final ClientRepository repository;
     private final ClientService clientService;
 
-    public ClientController(ClientRepository repository, ClientService clientService) {
-        this.repository = repository;
+    @Autowired
+    public ClientController(ClientService clientService) {
         this.clientService = clientService;
     }
 
     @GetMapping()
     @ResponseStatus(HttpStatus.OK)
     public List<Client> all() {
-        return repository.findAll();
+        return clientService.getAllClients();
     }
-
-    //get single client
 
     @GetMapping("/{username}")
     @ResponseStatus(HttpStatus.OK)
-    public User findClient(@PathVariable String username) {
-        return repository.findByUsername(username).orElseThrow(() -> new ClientNotFoundException(username));
+    public Client findClient(@PathVariable String username) {
+        return clientService.findByUsername(username);
     }
-
-    //post new client
 
     @PostMapping()
     @ResponseStatus(HttpStatus.CREATED)
