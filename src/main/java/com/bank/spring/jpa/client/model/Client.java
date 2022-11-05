@@ -6,9 +6,6 @@ import javax.persistence.*;
 @Table(name = "clients")
 public class Client {
 
-    /*Klient (id, imie, nazwisko, zahashowane haslo)
-     */
-
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;

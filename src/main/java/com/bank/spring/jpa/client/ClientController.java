@@ -33,8 +33,17 @@ public class ClientController {
 
     @PostMapping()
     @ResponseStatus(HttpStatus.CREATED)
-    public Client newClient(@RequestBody Client newClient) {
-        return clientService.save(newClient);
+    public void newClient(@RequestBody Client newClient) {
+        clientService.addNewClient(newClient);
+    }
+
+    @PutMapping("/update/{username}")
+    public void updateClient(
+            @PathVariable("username") String username,
+            @RequestParam(required = false) String firstName,
+            @RequestParam(required = false) String lastName,
+            @RequestParam(required = false) String password){
+            clientService.updateClient(username,firstName,lastName);
     }
 
 }
