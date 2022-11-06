@@ -6,10 +6,8 @@ import com.bank.spring.jpa.saldo.model.Saldo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Collections;
 import java.util.EnumSet;
 import java.util.List;
-import java.util.stream.Stream;
 
 @Service
 public class SaldoService {
@@ -26,13 +24,8 @@ public class SaldoService {
         saldoRepository.save(saldo);
     }
 
-    public boolean doesCurrencyExits(String currencyName) {
-        for (Currency currency : Currency.values()) {
-            if (currency.name().equalsIgnoreCase(currencyName)) {
-                return true;
-            }
-        }
-        return false;
+    public void generateAllSaldos(Client client) {
+        EnumSet.allOf(Currency.class).forEach(currency -> generateSaldo(client, currency));
     }
 
     public double getSaldo(long clientId, String currency) {
@@ -49,9 +42,16 @@ public class SaldoService {
         return amount;
     }
 
-    public void generateAllSaldos(Client client) {
-        EnumSet.allOf(Currency.class).forEach(currency -> generateSaldo(client, currency));
+    public boolean doesCurrencyExits(String currencyName) {
+        for (Currency currency : Currency.values()) {
+            if (currency.name().equalsIgnoreCase(currencyName)) {
+                return true;
+            }
+        }
+        return false;
     }
+
+
 
     public List<Saldo> findClientAllSaldos(long clientId) {
         return saldoRepository.findSaldoByClientId(clientId);
