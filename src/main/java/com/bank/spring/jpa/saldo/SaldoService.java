@@ -26,8 +26,19 @@ public class SaldoService {
         saldoRepository.save(saldo);
     }
 
+    public boolean doesCurrencyExits(String currencyName) {
+        for (Currency currency : Currency.values()) {
+            if (currency.name().equalsIgnoreCase(currencyName)) {
+                return true;
+            }
+        }
+        return false;
+    }
 
     public double getSaldo(long clientId, String currency) {
+        if (!doesCurrencyExits(currency)) {
+            throw new IllegalArgumentException("This currency does not exist!");
+        }
         List<Saldo> saldoList = findClientAllSaldos(clientId);
         double amount = 0;
         for (Saldo saldo : saldoList) {
