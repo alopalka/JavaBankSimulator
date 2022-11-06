@@ -15,19 +15,6 @@ jxl.log
 jmx.log
 derby.log
 
-# Gradle artifacts
-.gradle
-.gradletasknamecache
-/build
-buildSrc/build
-/spring-*/build
-/framework-bom/build
-/integration-tests/build
-/src/asciidoc/build
-spring-test/test-output/
-
-target/
-
 # Eclipse artifacts, including WTP generated manifests
 bin
 .classpath
@@ -43,6 +30,7 @@ spring-*/src/main/java/META-INF/MANIFEST.MF
 out
 test-output
 atlassian-ide-plugin.xml
+resources/
 
 # VS Code
 .vscode/

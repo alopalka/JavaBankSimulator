@@ -1,6 +1,7 @@
 package com.bank.spring.jpa.client;
 
 import com.bank.spring.jpa.client.model.Client;
+import com.bank.spring.jpa.saldo.SaldoService;
 import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -13,6 +14,9 @@ import java.util.List;
 public class ClientController {
 
     private final ClientService clientService;
+    //TUTAJ
+    @Autowired
+    private SaldoService saldoService;
 
     @Autowired
     public ClientController(ClientService clientService) {
@@ -34,7 +38,10 @@ public class ClientController {
     @PostMapping()
     @ResponseStatus(HttpStatus.CREATED)
     public void newClient(@RequestBody Client newClient) {
+
         clientService.addNewClient(newClient);
+        //TUTAJ
+        saldoService.generateSaldo(newClient);
     }
 
     @PutMapping("/update/{username}")

@@ -16,7 +16,10 @@ public class Saldo {
     @JoinColumn(name = "client_id")
     private Client client;
 
+    @Column(name = "currency")
     private String currency;
+
+    @Column(name = "amount")
     private double amount;
 
     protected Saldo() {}
