@@ -18,16 +18,16 @@ public class SaldoController {
         this.saldoService = saldoService;
     }
 
-//    //dodac jakos walute do tego
-//    @GetMapping("/saldo")
-//    public double getSaldo(){
-//        return saldoService.getSaldo();
-//    }
-
     @GetMapping("/saldo/{client_id}")
-    public List<Saldo> getClientSaldos(@PathVariable long client_id){
+    public List<Saldo> getClientSaldos(@PathVariable long client_id) {
         return saldoService.findClientAllSaldos(client_id);
     }
 
-
+    @GetMapping("/saldo/{client_id}/{currency}")
+    public double getClientCurrencyAmount(
+            @PathVariable long client_id,
+            @PathVariable String currency
+    ) {
+        return saldoService.getSaldo(client_id, currency);
+    }
 }

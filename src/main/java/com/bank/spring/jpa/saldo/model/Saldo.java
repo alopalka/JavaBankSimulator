@@ -54,6 +54,7 @@ public class Saldo {
         this.currency = currency;
     }
 
+
     public double getAmount() {
         return amount;
     }

@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface SaldoRepository extends JpaRepository<Saldo, Double>{
+public interface SaldoRepository extends JpaRepository<Saldo, Double> {
 
     List<Saldo> findSaldoByClientId(long clientId);
 //    double findBalance();

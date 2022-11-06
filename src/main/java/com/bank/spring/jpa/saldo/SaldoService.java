@@ -1,11 +1,15 @@
 package com.bank.spring.jpa.saldo;
 
 import com.bank.spring.jpa.client.model.Client;
+import com.bank.spring.jpa.currency.Currency;
 import com.bank.spring.jpa.saldo.model.Saldo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Collections;
+import java.util.EnumSet;
 import java.util.List;
+import java.util.stream.Stream;
 
 @Service
 public class SaldoService {
@@ -17,19 +21,29 @@ public class SaldoService {
         this.saldoRepository = saldoRepository;
     }
 
-    public void generateSaldo(Client client) {
-        Saldo saldo = new Saldo(client,"PLN", 0);
+    public void generateSaldo(Client client, Currency currency) {
+        Saldo saldo = new Saldo(client, currency.name(), 0);
+        saldoRepository.save(saldo);
     }
-//
-//    public double getSaldo() {
-//       return saldoRepository.findBalance();
-//    }
 
-    public List<Saldo> findClientAllSaldos(long clientId){
+
+    public double getSaldo(long clientId, String currency) {
+        List<Saldo> saldoList = findClientAllSaldos(clientId);
+        double amount = 0;
+        for (Saldo saldo : saldoList) {
+            if (saldo.getCurrency().equalsIgnoreCase(currency)) {
+                amount = saldo.getAmount();
+            }
+        }
+        return amount;
+    }
+
+    public void generateAllSaldos(Client client) {
+        EnumSet.allOf(Currency.class).forEach(currency -> generateSaldo(client, currency));
+    }
+
+    public List<Saldo> findClientAllSaldos(long clientId) {
         return saldoRepository.findSaldoByClientId(clientId);
     }
-//
-//    public String getCurrency() {
-//        return saldoRepository.getCurrency();
-//    }
+
 }

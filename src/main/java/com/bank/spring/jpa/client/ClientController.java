@@ -38,10 +38,8 @@ public class ClientController {
     @PostMapping()
     @ResponseStatus(HttpStatus.CREATED)
     public void newClient(@RequestBody Client newClient) {
-
         clientService.addNewClient(newClient);
-        //TUTAJ
-        saldoService.generateSaldo(newClient);
+        saldoService.generateAllSaldos(newClient);
     }
 
     @PutMapping("/update/{username}")
@@ -49,8 +47,8 @@ public class ClientController {
             @PathVariable("username") String username,
             @RequestParam(required = false) String firstName,
             @RequestParam(required = false) String lastName,
-            @RequestParam(required = false) String password){
-            clientService.updateClient(username,firstName,lastName);
+            @RequestParam(required = false) String password) {
+        clientService.updateClient(username, firstName, lastName);
     }
 
 }
