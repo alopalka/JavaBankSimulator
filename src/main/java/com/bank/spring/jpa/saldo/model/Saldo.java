@@ -23,7 +23,8 @@ public class Saldo {
     @Column(name = "amount")
     private double amount;
 
-    protected Saldo() {}
+    protected Saldo() {
+    }
 
     public Saldo(Client client, String currency, double amount) {
         this.client = client;
