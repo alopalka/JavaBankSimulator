@@ -5,6 +5,8 @@ import com.bank.spring.jpa.saldo.model.Saldo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class SaldoService {
 
@@ -18,12 +20,16 @@ public class SaldoService {
     public void generateSaldo(Client client) {
         Saldo saldo = new Saldo(client,"PLN", 0);
     }
+//
+//    public double getSaldo() {
+//       return saldoRepository.findBalance();
+//    }
 
-    public double getSaldo() {
-       return saldoRepository.findBalance();
+    public List<Saldo> findClientAllSaldos(long clientId){
+        return saldoRepository.findSaldoByClientId(clientId);
     }
-
-    public String getCurrency() {
-        return saldoRepository.getCurrency();
-    }
+//
+//    public String getCurrency() {
+//        return saldoRepository.getCurrency();
+//    }
 }
