@@ -1,6 +1,7 @@
 package com.bank.spring.jpa.saldo.model;
 
 import com.bank.spring.jpa.client.model.Client;
+import com.bank.spring.jpa.currency.Currency;
 
 import javax.persistence.*;
 

@@ -1,15 +1,25 @@
 package com.bank.spring.jpa.currency;
 
 public enum Currency {
-    USD,
-    PLN,
-    EUR,
-    JPY,
-    GBP,
-    CHF,
-    CAD,
-    AUD,
-    ZAR,
-    CNY,
+    USD("USD"),
+    PLN("PLN"),
+    EUR("EUR"),
+//    JPY,
+//    GBP,
+//    CHF,
+//    CAD,
+//    AUD,
+//    ZAR,
+//    CNY,
     ;
+
+    private final String currencyUnit;
+
+    Currency(String currencyUnit){
+        this.currencyUnit = currencyUnit;
+    }
+
+    public String getCurrencyUnit() {
+        return currencyUnit;
+    }
 }

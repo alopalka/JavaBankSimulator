@@ -14,7 +14,7 @@ import java.util.List;
 public class ClientController {
 
     private final ClientService clientService;
-    //TUTAJ
+
     @Autowired
     private SaldoService saldoService;
 
