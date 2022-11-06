@@ -11,6 +11,7 @@ import java.util.List;
 @Repository
 public interface SaldoRepository extends JpaRepository<Saldo, Double> {
 
+
     List<Saldo> findSaldoByClientId(long clientId);
 
 }

@@ -8,7 +8,7 @@ import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 
-@Service("cs")
+@Service()
 public class ClientService {
 
     private final ClientRepository clientRepository;

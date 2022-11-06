@@ -10,7 +10,7 @@ import java.sql.Timestamp;
 public class Transaction {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
     @Column(name = "transaction_date")
@@ -25,7 +25,8 @@ public class Transaction {
     private String currency;
     private double amount;
 
-    protected Transaction(){}
+    protected Transaction() {
+    }
 
     public Transaction(Timestamp transaction_date, Client clientFrom, Client clientTo, String currency, double amount) {
         this.transaction_date = transaction_date;
