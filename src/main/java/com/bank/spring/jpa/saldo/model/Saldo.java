@@ -10,7 +10,7 @@ import javax.persistence.*;
 public class Saldo {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
     @ManyToOne
@@ -23,7 +23,8 @@ public class Saldo {
     @Column(name = "amount")
     private double amount;
 
-    protected Saldo() {}
+    protected Saldo() {
+    }
 
     public Saldo(Client client, String currency, double amount) {
         this.client = client;

@@ -9,6 +9,7 @@ ivy-cache
 argfile*
 activemq-data/
 classes/
+target/
 
 # Log files
 jxl.log
@@ -31,6 +32,8 @@ out
 test-output
 atlassian-ide-plugin.xml
 resources/
+
+.appilcation.properties
 
 # VS Code
 .vscode/
