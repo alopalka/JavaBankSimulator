@@ -14,9 +14,12 @@ public class SecurityConfiguration {
     @Bean
     public SecurityFilterChain configure(HttpSecurity http) throws Exception{
         return http
-                .authorizeHttpRequests(auth ->{
-                    auth.antMatchers("/").permitAll();
-                })
+                .authorizeRequests()
+                .antMatchers("/")
+                .permitAll()
+                .anyRequest()
+                .authenticated()
+                .and()
                 .httpBasic(Customizer.withDefaults())
                 .build();
     }
