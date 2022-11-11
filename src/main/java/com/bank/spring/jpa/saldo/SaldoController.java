@@ -1,9 +1,7 @@
 package com.bank.spring.jpa.saldo;
 
 import com.bank.spring.jpa.saldo.model.Saldo;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -28,5 +26,21 @@ public class SaldoController {
             @PathVariable String currency
     ) {
         return saldoService.getSaldo(client_id, currency);
+    }
+
+    @PostMapping("saldo/withdraw/{client_id}/{currency}")
+    public void withdrawCash(
+            @PathVariable long client_id,
+            @RequestParam double amount,
+            @PathVariable String currency) {
+        saldoService.withdrawal(client_id, amount, currency);
+    }
+
+    @PostMapping("saldo/deposit/{client_id}/{currency}")
+    public void depositCash(
+            @PathVariable long client_id,
+            @RequestParam double amount,
+            @PathVariable String currency) {
+        saldoService.deposit(client_id, amount, currency);
     }
 }

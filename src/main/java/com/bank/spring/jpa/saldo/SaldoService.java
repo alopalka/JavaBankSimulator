@@ -41,6 +41,7 @@ public class SaldoService {
         return amount;
     }
 
+
     public boolean doesCurrencyExits(String currencyName) {
         for (Currency currency : Currency.values()) {
             if (currency.name().equalsIgnoreCase(currencyName)) {
@@ -49,6 +50,19 @@ public class SaldoService {
         }
         return false;
     }
+
+    public double withdrawal(long clientId, double amount, String currency) {
+        double currentSaldo = getSaldo(clientId, currency);
+
+        return currentSaldo - amount;
+    }
+
+    public double deposit(long clientId, double amount, String currency) {
+        double currentSaldo = getSaldo(clientId, currency);
+
+        return currentSaldo + amount;
+    }
+
 
 
 

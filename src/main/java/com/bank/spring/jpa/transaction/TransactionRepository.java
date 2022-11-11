@@ -1,4 +1,9 @@
 package com.bank.spring.jpa.transaction;
 
-public interface TransactionRepository {
+import com.bank.spring.jpa.transaction.model.Transaction;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+@Repository
+public interface TransactionRepository extends JpaRepository<Transaction, Long> {
 }
