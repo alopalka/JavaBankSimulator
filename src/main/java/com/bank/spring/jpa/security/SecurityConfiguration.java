@@ -11,8 +11,9 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
-import org.springframework.security.provisioning.UserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
+
+import static com.bank.spring.jpa.security.ApplicationUserRole.*;
 
 @Configuration
 @EnableWebSecurity
@@ -30,7 +31,7 @@ public class SecurityConfiguration {
         UserDetails user1 = User.builder()
                 .username("test")
                 .password(passwordEncoder.encode("test1"))
-                .roles("USER")
+                .roles(CLIENT.name())
                 .build();
         return new InMemoryUserDetailsManager(user1);
     }
