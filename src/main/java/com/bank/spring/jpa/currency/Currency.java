@@ -11,4 +11,8 @@ public enum Currency {
     AUD,
     ZAR,
     CNY,
+//<<<<<<< HEAD
 }
+//=======
+//}
+//>>>>>>> 0a12f547c000cc43089484f0f61013e67f2608f9

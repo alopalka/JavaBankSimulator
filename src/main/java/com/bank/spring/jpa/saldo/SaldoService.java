@@ -3,7 +3,6 @@ package com.bank.spring.jpa.saldo;
 import com.bank.spring.jpa.client.model.Client;
 import com.bank.spring.jpa.currency.Currency;
 import com.bank.spring.jpa.saldo.model.Saldo;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.EnumSet;
@@ -12,8 +11,8 @@ import java.util.List;
 @Service
 public class SaldoService {
 
-    @Autowired
-    private SaldoRepository saldoRepository;
+
+    private final SaldoRepository saldoRepository;
 
     public SaldoService(SaldoRepository saldoRepository) {
         this.saldoRepository = saldoRepository;
@@ -42,6 +41,7 @@ public class SaldoService {
         return amount;
     }
 
+
     public boolean doesCurrencyExits(String currencyName) {
         for (Currency currency : Currency.values()) {
             if (currency.name().equalsIgnoreCase(currencyName)) {
@@ -50,6 +50,19 @@ public class SaldoService {
         }
         return false;
     }
+
+    public double withdrawal(long clientId, double amount, String currency) {
+        double currentSaldo = getSaldo(clientId, currency);
+
+        return currentSaldo - amount;
+    }
+
+    public double deposit(long clientId, double amount, String currency) {
+        double currentSaldo = getSaldo(clientId, currency);
+
+        return currentSaldo + amount;
+    }
+
 
 
 
