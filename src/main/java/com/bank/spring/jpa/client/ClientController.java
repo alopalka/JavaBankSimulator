@@ -2,6 +2,7 @@ package com.bank.spring.jpa.client;
 
 import com.bank.spring.jpa.client.model.Client;
 import com.bank.spring.jpa.saldo.SaldoService;
+import lombok.RequiredArgsConstructor;
 import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -10,18 +11,16 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/client")
+@RequestMapping("/api/v1/client")
+@RequiredArgsConstructor
 public class ClientController {
 
     private final ClientService clientService;
 
+
+    // TODO: This should not look like this
     @Autowired
     private SaldoService saldoService;
-
-    @Autowired
-    public ClientController(ClientService clientService) {
-        this.clientService = clientService;
-    }
 
     @GetMapping()
     @ResponseStatus(HttpStatus.OK)

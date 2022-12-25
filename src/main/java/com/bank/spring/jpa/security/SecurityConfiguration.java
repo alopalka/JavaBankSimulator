@@ -1,55 +1,41 @@
 package com.bank.spring.jpa.security;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.config.Customizer;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.provisioning.InMemoryUserDetailsManager;
-import org.springframework.security.web.SecurityFilterChain;
-
-import static com.bank.spring.jpa.security.ApplicationUserRole.*;
 
 @Configuration
-@EnableWebSecurity
-public class SecurityConfiguration {
+@EnableGlobalMethodSecurity(securedEnabled = true)
+public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
-    private final PasswordEncoder passwordEncoder;
+    private static final String BASE_URL = "/api";
 
-    @Autowired
-    public SecurityConfiguration(PasswordEncoder passwordEncoder) {
-        this.passwordEncoder = passwordEncoder;
-    }
-
-    @Bean
-    protected UserDetailsService userDetailsManager() {
-        UserDetails user1 = User.builder()
-                .username("test")
-                .password(passwordEncoder.encode("test1"))
-                .roles(CLIENT.name())
-                .build();
-        return new InMemoryUserDetailsManager(user1);
-    }
-
-    // DELETE THIS IN THE FUTURE TERRIBLE SOLUTION FOR PRODUCTION
-
-
-    @Bean
-    public SecurityFilterChain configure(HttpSecurity http) throws Exception {
-        return http
-                .authorizeRequests()
-                .antMatchers("/")
-                .permitAll()
-                .anyRequest()
-                .authenticated()
+    @Override
+    public void configure(HttpSecurity http) throws Exception {
+        http.authorizeRequests()
+                .anyRequest().authenticated()
                 .and()
-                .httpBasic(Customizer.withDefaults())
-                .build();
+                .httpBasic()
+                .and()
+                .csrf().disable();
+    }
+
+    @Override
+    public void configure(AuthenticationManagerBuilder auth) throws Exception {
+        auth.inMemoryAuthentication()
+                .withUser("admin")
+                .password(passwordEncoder().encode("admin"))
+                .roles("ADMIN");
+    }
+
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
     }
 
 }
